@@ -24,11 +24,11 @@ export function BlogCard(props: Props) {
   return (
     <a href={`/blog/${post().slug}`} class="project-card neu-convex overflow-hidden cursor-pointer block">
       {post().coverImage && (
-        <div class="relative aspect-[2/1] bg-[var(--muted)] overflow-hidden">
+        <div class="relative aspect-video bg-[var(--muted)] overflow-hidden">
           <img
             src={post().coverImage}
             alt={post().title}
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
         </div>
@@ -46,7 +46,9 @@ export function BlogCard(props: Props) {
           {post().category.name}
         </span>
         
-        <h3 class="text-xl font-bold mb-2">{post().title}</h3>
+        <h3 class="text-xl font-bold mb-2 hover:text-[var(--muted-foreground)] transition-colors">
+          {post().title}
+        </h3>
         
         {post().excerpt && (
           <p class="text-[var(--muted-foreground)] mb-4 line-clamp-2">{post().excerpt}</p>
