@@ -1,6 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { Navigation } from '../../components/Navigation';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -16,10 +15,8 @@ const { Content } = await post.render();
 ---
 
 <Layout title={`${post.data.title} | Blog`}>
-  <Navigation client:load />
-  
-  <main class="pt-24 pb-16 px-4">
-    <article class="max-w-3xl mx-auto">
+  <main class="pt-32 pb-16 px-4">
+    <article class="max-w-6xl mx-auto">
       <!-- Back Button -->
       <a 
         href="/blog" 

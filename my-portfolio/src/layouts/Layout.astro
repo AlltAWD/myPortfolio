@@ -1,5 +1,7 @@
 ---
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
+import { Navigation } from '../components/Navigation';
 
 interface Props {
   title: string;
@@ -24,9 +26,26 @@ const { title, description = 'Personal Portfolio' } = Astro.props;
           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.classList.toggle('dark', theme === 'dark');
       })();
+
+      // Scroll Animation Observer
+      document.addEventListener('astro:page-load', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      });
     </script>
+    <ClientRouter />
   </head>
   <body class="min-h-screen flex flex-col">
-    <slot />
+    <Navigation client:load transition:persist="main-nav" />
+    <div class="flex-1 w-full">
+      <slot />
+    </div>
   </body>
 </html>

@@ -1,0 +1,134 @@
+---
+import { BookOpen, Code, Search, ArrowRight, Clock } from 'lucide-solid';
+---
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Learning Column -->
+  <a href="/status#learning" class="neu-flat p-6 rounded-2xl hover:scale-[1.02] transition-transform block reveal">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2 neu-pressed rounded-lg text-blue-500">
+          <BookOpen class="w-6 h-6" />
+        </div>
+        <h2 class="text-xl font-bold">Learning</h2>
+      </div>
+      <ArrowRight class="w-4 h-4 text-[var(--muted-foreground)]" />
+    </div>
+    
+    <div class="space-y-6">
+      <div>
+        <div class="flex justify-between text-sm mb-2">
+          <span class="font-medium">Advanced Rust Patterns</span>
+          <span class="text-[var(--muted-foreground)]">75%</span>
+        </div>
+        <div class="h-2 bg-[var(--muted)] rounded-full overflow-hidden">
+          <div class="h-full bg-blue-500 rounded-full" style="width: 75%"></div>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-2">Mastering async/await & macros</p>
+        <div class="flex items-center gap-1 mt-2 text-[10px] text-[var(--muted-foreground)] opacity-70">
+          <Clock class="w-3 h-3" />
+          <span>Updated 2 days ago</span>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flex justify-between text-sm mb-2">
+          <span class="font-medium">System Design</span>
+          <span class="text-[var(--muted-foreground)]">40%</span>
+        </div>
+        <div class="h-2 bg-[var(--muted)] rounded-full overflow-hidden">
+          <div class="h-full bg-blue-500 rounded-full" style="width: 40%"></div>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-2">Distributed systems architecture</p>
+        <div class="flex items-center gap-1 mt-2 text-[10px] text-[var(--muted-foreground)] opacity-70">
+          <Clock class="w-3 h-3" />
+          <span>Updated 5 days ago</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Projects Column (Redesigned) -->
+  <a href="/status#building" class="neu-flat p-6 rounded-2xl hover:scale-[1.02] transition-transform block reveal" style="transition-delay: 100ms">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2 neu-pressed rounded-lg text-emerald-500">
+          <Code class="w-6 h-6" />
+        </div>
+        <h2 class="text-xl font-bold">Building</h2>
+      </div>
+      <ArrowRight class="w-4 h-4 text-[var(--muted-foreground)]" />
+    </div>
+    
+    <div class="space-y-6">
+      <div>
+        <div class="flex justify-between text-sm mb-2">
+          <span class="font-medium">Portfolio Website</span>
+          <span class="text-emerald-500 font-bold text-xs">80%</span>
+        </div>
+        <div class="h-2 bg-[var(--muted)] rounded-full overflow-hidden">
+          <div class="h-full bg-emerald-500 rounded-full" style="width: 80%"></div>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-2">Adding animations & content</p>
+        <div class="flex items-center gap-1 mt-2 text-[10px] text-[var(--muted-foreground)] opacity-70">
+          <Clock class="w-3 h-3" />
+          <span>Updated 4 hours ago</span>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flex justify-between text-sm mb-2">
+          <span class="font-medium">SaaS Starter Kit</span>
+          <span class="text-yellow-500 font-bold text-xs">15%</span>
+        </div>
+        <div class="h-2 bg-[var(--muted)] rounded-full overflow-hidden">
+          <div class="h-full bg-yellow-500 rounded-full" style="width: 15%"></div>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-2">Authentication & Database setup</p>
+        <div class="flex items-center gap-1 mt-2 text-[10px] text-[var(--muted-foreground)] opacity-70">
+          <Clock class="w-3 h-3" />
+          <span>Updated 1 week ago</span>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <!-- Research Column (Redesigned) -->
+  <a href="/status#research" class="neu-flat p-6 rounded-2xl hover:scale-[1.02] transition-transform block reveal" style="transition-delay: 200ms">
+    <div class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-3">
+        <div class="p-2 neu-pressed rounded-lg text-purple-500">
+          <Search class="w-6 h-6" />
+        </div>
+        <h2 class="text-xl font-bold">Research</h2>
+      </div>
+      <ArrowRight class="w-4 h-4 text-[var(--muted-foreground)]" />
+    </div>
+    
+    <div class="space-y-4">
+      <div class="neu-pressed p-3 rounded-xl">
+        <div class="flex justify-between items-center mb-1">
+          <span class="font-bold text-sm">LLM Fine-tuning</span>
+          <span class="text-[10px] px-2 py-0.5 bg-purple-500/10 text-purple-500 rounded-full border border-purple-500/20">PHASE 2</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)]">Experimenting with Llama 3 parameters</p>
+        <div class="flex items-center gap-1 mt-2 text-[10px] text-[var(--muted-foreground)] opacity-70">
+          <Clock class="w-3 h-3" />
+          <span>Updated 3 days ago</span>
+        </div>
+      </div>
+
+      <div class="neu-pressed p-3 rounded-xl opacity-70">
+        <div class="flex justify-between items-center mb-1">
+          <span class="font-bold text-sm">AI Agents</span>
+          <span class="text-[10px] px-2 py-0.5 bg-[var(--muted-foreground)]/10 text-[var(--muted-foreground)] rounded-full border border-[var(--muted-foreground)]/20">PHASE 1</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)]">Literature review phase</p>
+        <div class="flex items-center gap-1 mt-2 text-[10px] text-[var(--muted-foreground)] opacity-70">
+          <Clock class="w-3 h-3" />
+          <span>Updated 2 weeks ago</span>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

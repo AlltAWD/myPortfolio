@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BookOpen, Code, Search, ArrowLeft, Clock } from 'lucide-solid';
+---
+
+<Layout title="Status Detail | Hanson Liu">
+  <main class="pt-32 pb-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <a href="/" class="inline-flex items-center gap-2 text-[var(--muted-foreground)] hover:text-[var(--foreground)] mb-8 transition-colors">
+        <ArrowLeft class="w-4 h-4" />
+        Back to Home
+      </a>
+
+      <h1 class="text-4xl font-bold mb-12">Detailed Status</h1>
+
+      <!-- Learning Section -->
+      <section id="learning" class="mb-16">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="p-3 neu-pressed rounded-xl text-blue-500">
+            <BookOpen class="w-8 h-8" />
+          </div>
+          <h2 class="text-3xl font-bold">Learning Path</h2>
+        </div>
+
+        <div class="neu-flat p-8 rounded-2xl space-y-8">
+          <div>
+            <div class="flex justify-between items-end mb-2">
+              <h3 class="text-xl font-bold">Advanced Rust Patterns</h3>
+              <span class="text-blue-500 font-bold">75%</span>
+            </div>
+            <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
+              <div class="h-full bg-blue-500 rounded-full" style="width: 75%"></div>
+            </div>
+            <p class="text-[var(--muted-foreground)]">Currently focusing on procedural macros and async runtime internals. Next up: Unsafe Rust best practices.</p>
+            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+              <Clock class="w-4 h-4" />
+              <span>Last updated: 2 days ago</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-end mb-2">
+              <h3 class="text-xl font-bold">System Design</h3>
+              <span class="text-blue-500 font-bold">40%</span>
+            </div>
+            <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
+              <div class="h-full bg-blue-500 rounded-full" style="width: 40%"></div>
+            </div>
+            <p class="text-[var(--muted-foreground)]">Studying distributed consensus algorithms (Raft, Paxos) and database sharding strategies.</p>
+            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+              <Clock class="w-4 h-4" />
+              <span>Last updated: 5 days ago</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Building Section -->
+      <section id="building" class="mb-16">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="p-3 neu-pressed rounded-xl text-emerald-500">
+            <Code class="w-8 h-8" />
+          </div>
+          <h2 class="text-3xl font-bold">Active Builds</h2>
+        </div>
+
+        <div class="neu-flat p-8 rounded-2xl space-y-8">
+          <div>
+            <div class="flex justify-between items-end mb-2">
+              <h3 class="text-xl font-bold">Portfolio Website</h3>
+              <span class="text-emerald-500 font-bold">80%</span>
+            </div>
+            <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
+              <div class="h-full bg-emerald-500 rounded-full" style="width: 80%"></div>
+            </div>
+            <ul class="list-disc list-inside text-[var(--muted-foreground)] mt-4 space-y-1">
+              <li>Implemented View Transitions</li>
+              <li>Added Dark Mode support</li>
+              <li>Pending: Blog comment system</li>
+            </ul>
+            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+              <Clock class="w-4 h-4" />
+              <span>Last updated: 4 hours ago</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Research Section -->
+      <section id="research" class="mb-16">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="p-3 neu-pressed rounded-xl text-purple-500">
+            <Search class="w-8 h-8" />
+          </div>
+          <h2 class="text-3xl font-bold">Research Lab</h2>
+        </div>
+
+        <div class="neu-flat p-8 rounded-2xl space-y-8">
+          <div class="border-l-4 border-purple-500 pl-6 py-2">
+            <h3 class="text-xl font-bold mb-2">LLM Fine-tuning</h3>
+            <div class="flex gap-2 mb-4">
+              <span class="px-3 py-1 bg-purple-500/10 text-purple-500 rounded-full text-sm font-bold">PHASE 2: Experimentation</span>
+            </div>
+            <p class="text-[var(--muted-foreground)]">
+              Investigating the impact of LoRA rank on reasoning capabilities in small language models (7B parameters).
+              Currently running benchmarks on the GSM8K dataset.
+            </p>
+            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+              <Clock class="w-4 h-4" />
+              <span>Last updated: 3 days ago</span>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-[var(--muted)] pl-6 py-2 opacity-75">
+            <h3 class="text-xl font-bold mb-2">Autonomous AI Agents</h3>
+            <div class="flex gap-2 mb-4">
+              <span class="px-3 py-1 bg-[var(--muted)] text-[var(--muted-foreground)] rounded-full text-sm font-bold">PHASE 1: Literature Review</span>
+            </div>
+            <p class="text-[var(--muted-foreground)]">
+              Reading papers on multi-agent collaboration and memory management.
+            </p>
+            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+              <Clock class="w-4 h-4" />
+              <span>Last updated: 2 weeks ago</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>

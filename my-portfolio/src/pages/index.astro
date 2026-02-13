@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Navigation } from '../components/Navigation';
 import { ProjectCard } from '../components/ProjectCard';
 import { BlogCard } from '../components/BlogCard';
+import IntroSection from '../components/IntroSection.astro';
+import StatusSection from '../components/StatusSection.astro';
 import { getCollection } from 'astro:content';
 
 const projectsCollection = await getCollection('projects');
@@ -35,30 +36,20 @@ const posts = postsCollection.slice(0, 3).map((post) => ({
 ---
 
 <Layout title="Home | My Portfolio">
-  <Navigation client:load />
   
-  <main class="pt-24 pb-16 px-4">
+  <main class="pt-32 pb-16 px-4">
     <div class="max-w-6xl mx-auto space-y-12">
-      <!-- Hero Section -->
-      <section class="text-center py-12">
-        <div class="neu-flat inline-block p-8 rounded-full mb-8">
-          <div class="w-32 h-32 rounded-full bg-gradient-to-br from-black/10 to-black/5 flex items-center justify-center">
-            <span class="text-5xl font-bold">JD</span>
-          </div>
-        </div>
-        
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">
-          <span>John</span>{' '}
-          <span class="text-[var(--muted-foreground)]">Developer</span>
-        </h1>
-        
-        <p class="text-xl text-[var(--muted-foreground)] max-w-2xl mx-auto">
-          Full-stack developer passionate about creating elegant solutions.
-        </p>
+      
+      <!-- Intro Section -->
+      <IntroSection />
+
+      <!-- Status Board / Roadmap -->
+      <section class="pb-8">
+        <StatusSection />
       </section>
 
       <!-- Featured Projects -->
-      <section>
+      <section class="reveal">
         <h2 class="text-2xl font-bold mb-6">Featured Projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project) => (
@@ -73,7 +64,7 @@ const posts = postsCollection.slice(0, 3).map((post) => ({
       </section>
 
       <!-- Latest Posts -->
-      <section>
+      <section class="reveal">
         <h2 class="text-2xl font-bold mb-6">Latest Posts</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (

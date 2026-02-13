@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Navigation } from '../components/Navigation';
 import { ProjectsPage } from '../components/ProjectsPage';
 import { getCollection } from 'astro:content';
 
@@ -26,9 +25,8 @@ const allTags = [...new Set(projects.flatMap((p) => p.tags.map((t) => t.name)))]
 ---
 
 <Layout title="Projects | My Portfolio">
-  <Navigation client:load />
   
-  <main class="pt-24 pb-16 px-4">
+  <main class="pt-32 pb-16 px-4">
     <div class="max-w-6xl mx-auto">
       <h1 class="text-3xl font-bold mb-8">Projects</h1>
       

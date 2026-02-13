@@ -1,0 +1,48 @@
+---
+import { Github, Linkedin, Mail, FileText } from 'lucide-solid';
+
+const tags = [
+  { name: 'Full Stack', color: '#3b82f6' },
+  { name: 'AI/ML', color: '#ef4444' },
+  { name: 'Rust', color: '#f97316' },
+  { name: 'TypeScript', color: '#3178c6' },
+  { name: 'System Design', color: '#8b5cf6' },
+];
+---
+
+<div class="neu-flat p-8 rounded-2xl mb-8 reveal">
+  <div class="flex flex-col md:flex-row gap-8 items-start">
+    <div class="neu-convex p-6 rounded-2xl shrink-0 mx-auto md:mx-0 animate-float">
+      <div class="w-32 h-32 rounded-full bg-gradient-to-br from-black/10 to-black/5 flex items-center justify-center dark:from-white/10 dark:to-white/5">
+        <span class="text-4xl font-bold">HL</span>
+      </div>
+    </div>
+    
+    <div class="flex-1 text-center md:text-left">
+      <h2 class="text-3xl font-bold mb-2">Hanson Liu</h2>
+      <p class="text-[var(--muted-foreground)] mb-4 text-lg">Full-Stack Developer & AI Enthusiast</p>
+      
+      <p class="leading-relaxed mb-6 max-w-2xl">
+        Hi there! I'm a passionate developer with a love for creating elegant,
+        performant applications. I specialize in modern web technologies and
+        have a strong interest in artificial intelligence and machine learning.
+      </p>
+
+      <!-- Tech Stack Tags -->
+      <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+        {tags.map((tag) => (
+          <span 
+            class="px-3 py-1 text-sm font-semibold rounded-full border"
+            style={{
+              backgroundColor: `${tag.color}15`,
+              color: tag.color,
+              borderColor: `${tag.color}30`
+            }}
+          >
+            {tag.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>

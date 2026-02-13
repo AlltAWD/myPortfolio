@@ -1,61 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Navigation } from '../components/Navigation';
+import IntroSection from '../components/IntroSection.astro';
+import StatusSection from '../components/StatusSection.astro';
 import { Github, Linkedin, Mail, FileText } from 'lucide-solid';
 ---
 
 <Layout title="About | My Portfolio">
-  <Navigation client:load/>
   
-  <main class="pt-24 pb-16 px-4">
-    <div class="max-w-3xl mx-auto">
+  <main class="pt-32 pb-16 px-4">
+    <div class="max-w-6xl mx-auto">
       <h1 class="text-3xl font-bold mb-8">About Me</h1>
       
-      <div class="neu-flat p-8 rounded-2xl mb-8">
-        <div class="flex flex-col md:flex-row gap-8 items-start">
-          <div class="neu-convex p-6 rounded-2xl">
-            <div class="w-32 h-32 rounded-full bg-gradient-to-br from-black/10 to-black/5 flex items-center justify-center dark:from-white/10 dark:to-white/5">
-              <span class="text-4xl font-bold">JD</span>
-            </div>
-          </div>
-          
-          <div class="flex-1">
-            <h2 class="text-2xl font-bold mb-2">John Developer</h2>
-            <p class="text-[var(--muted-foreground)] mb-4">Full-Stack Developer & AI Enthusiast</p>
-            
-            <p class="leading-relaxed mb-6">
-              Hi there! I'm a passionate developer with a love for creating elegant,
-              performant applications. I specialize in modern web technologies and
-              have a strong interest in artificial intelligence and machine learning.
-            </p>
-          </div>
-        </div>
-      </div>
+      <IntroSection />
       
-      <!-- Skills Section -->
-      <div class="neu-flat p-8 rounded-2xl mb-8">
-        <h3 class="text-xl font-bold mb-6">Skills & Technologies</h3>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {[
-            { name: 'React/Next.js', level: 95 },
-            { name: 'TypeScript', level: 90 },
-            { name: 'Python', level: 85 },
-            { name: 'Node.js', level: 88 },
-            { name: 'AI/ML', level: 75 },
-            { name: 'Database', level: 82 },
-          ].map((skill) => (
-            <div class="neu-pressed p-4 rounded-xl">
-              <div class="flex justify-between mb-2">
-                <span class="font-medium">{skill.name}</span>
-                <span class="text-[var(--muted-foreground)] text-sm">{skill.level}%</span>
-              </div>
-              <div class="h-2 bg-[var(--muted)] rounded-full overflow-hidden">
-                <div class="h-full bg-[var(--foreground)] rounded-full" style={`width: ${skill.level}%`} />
-              </div>
-            </div>
-          ))}
-        </div>
+      <div class="mb-8">
+        <h3 class="text-xl font-bold mb-6">Current Status</h3>
+        <StatusSection />
       </div>
       
       <!-- Contact Section -->
