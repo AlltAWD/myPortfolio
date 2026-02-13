@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Navigation } from '../components/Navigation';
+import { ProjectCard } from '../components/ProjectCard';
+import { BlogCard } from '../components/BlogCard';
+
+const projects = [
+  {
+    id: '1',
+    title: 'AI Image Generator',
+    description: 'A powerful image generation tool using stable diffusion models.',
+    imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800',
+    githubUrl: 'https://github.com',
+    demoUrl: 'https://demo.com',
+    tags: [
+      { name: 'React', color: '#61dafb' },
+      { name: 'TypeScript', color: '#3178c6' },
+      { name: 'AI/ML', color: '#ff6b6b' },
+    ],
+  },
+  // Add more projects...
+];
+
+const posts = [
+  {
+    id: '1',
+    title: 'Building with SolidJS',
+    slug: 'building-with-solidjs',
+    excerpt: 'Explore how SolidJS enables incredibly fast UI updates.',
+    coverImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800',
+    readingTime: 8,
+    publishedAt: '2024-01-15',
+    category: { name: 'Web Dev', color: '#4ecdc4' },
+  },
+  // Add more posts...
+];
+---
+
+<Layout title="Home | My Portfolio">
+  <Navigation />
+  
+  <main class="pt-24 pb-16 px-4">
+    <div class="max-w-6xl mx-auto space-y-12">
+      <!-- Hero Section -->
+      <section class="text-center py-12">
+        <div class="neu-flat inline-block p-8 rounded-full mb-8">
+          <div class="w-32 h-32 rounded-full bg-gradient-to-br from-black/10 to-black/5 flex items-center justify-center dark:from-white/10 dark:to-white/5">
+            <span class="text-5xl font-bold">JD</span>
+          </div>
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <span>John</span>{' '}
+          <span class="text-[var(--muted-foreground)]">Developer</span>
+        </h1>
+        
+        <p class="text-xl text-[var(--muted-foreground)] max-w-2xl mx-auto">
+          Full-stack developer passionate about creating elegant solutions to complex problems.
+        </p>
+      </section>
+
+      <!-- Featured Projects -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Featured Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.slice(0, 3).map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/projects" class="px-6 py-3 neu-flat rounded-xl font-medium hover:opacity-80">
+            View All Projects →
+          </a>
+        </div>
+      </section>
+
+      <!-- Latest Posts -->
+      <section>
+        <h2 class="text-2xl font-bold mb-6">Latest Posts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="py-8 px-4 border-t border-[var(--border)] mt-auto">
+    <div class="max-w-6xl mx-auto text-center text-[var(--muted-foreground)] text-sm">
+      <p>© {new Date().getFullYear()} John Developer. Built with Astro & SolidJS.</p>
+    </div>
+  </footer>
+</Layout>

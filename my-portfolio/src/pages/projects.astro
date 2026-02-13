@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Navigation } from '../components/Navigation';
+import { ProjectCard } from '../components/ProjectCard';
+import { SearchFilter } from '../components/SearchFilter';
+
+// Import your projects data
+const projects = [
+  // Your projects array...
+];
+
+// Get unique tags
+const allTags = [...new Set(projects.flatMap(p => p.tags.map(t => t.name)))].map(name => {
+  const project = projects.find(p => p.tags.some(t => t.name === name));
+  const tag = project?.tags.find(t => t.name === name);
+  return { name, color: tag?.color || '#6b7280' };
+});
+---
+
+<Layout title="Projects | My Portfolio">
+  <Navigation />
+  
+  <main class="pt-24 pb-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-3xl font-bold mb-8">Projects</h1>
+      
+      <!-- Note: For interactive filtering, you'd need to use a SolidJS component -->
+      <!-- This is a static version - for dynamic filtering, create a ProjectsPage.tsx component -->
+      
+      <div class="neu-flat p-6 mb-8">
+        <p class="text-[var(--muted-foreground)]">
+          Filter functionality requires client-side JavaScript.
+          Use the SearchFilter SolidJS component for interactive filtering.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
