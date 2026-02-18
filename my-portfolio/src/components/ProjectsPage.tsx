@@ -15,7 +15,6 @@ const tagColors: Record<string, string> = {
   'Mobile': '#a855f7',
   'Database': '#f59e0b',
   'SolidJS': '#4f88c6',
-  'Astro': '#ff5d01',
   'Tailwind': '#38bdf8',
 };
 

@@ -108,3 +108,43 @@ body {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Code Block Copy Button */
+.code-wrapper {
+  position: relative;
+  margin: 2rem 0;
+}
+
+/* Override margin on pre when it's wrapped */
+.prose .code-wrapper pre {
+  margin: 0 !important;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--card);
+  box-shadow: var(--shadow-light), var(--shadow-dark);
+  color: var(--muted-foreground);
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.code-wrapper:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn:hover {
+  color: var(--foreground);
+  transform: translateY(-2px);
+}
+
+.copy-btn:active {
+  box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
+  transform: translateY(0);
+}

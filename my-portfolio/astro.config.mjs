@@ -12,6 +12,9 @@ export default defineConfig({
     tailwind()
   ],
   markdown: {
+    shikiConfig: {
+      theme: 'dracula',
+    },
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
   },
