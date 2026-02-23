@@ -21,11 +21,17 @@ const { title, description = 'Personal Portfolio' } = Astro.props;
     <title>{title}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
     <script is:inline>
-      (function() {
+      function setDarkMode() {
         const theme = localStorage.getItem('theme') || 
           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.classList.toggle('dark', theme === 'dark');
-      })();
+      }
+
+      // Run on initial load
+      setDarkMode();
+
+      // Run after every View Transition swap
+      document.addEventListener('astro:after-swap', setDarkMode);
 
       // Scroll Animation Observer
       document.addEventListener('astro:page-load', () => {

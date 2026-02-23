@@ -49,10 +49,16 @@ export function Navigation() {
   });
 
   const toggleTheme = () => {
+    // Enable global transition
+    document.documentElement.classList.add('theme-transition');
+    
     const newTheme = isDark() ? 'light' : 'dark';
     setIsDark(!isDark());
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
     localStorage.setItem('theme', newTheme);
+
+    // Disable global transition after animation
+    setTimeout(() => document.documentElement.classList.remove('theme-transition'), 150);
   };
 
   // Update capsule position when activeTab changes
@@ -117,18 +123,18 @@ export function Navigation() {
 
         <div class="flex items-center gap-2">
           <Show when={mounted()}>
-            <Motion.button
+            <button
               onClick={toggleTheme}
-              class="w-10 h-10 neu-flat flex items-center justify-center cursor-pointer theme-toggle"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
+              class="w-10 h-10 flex items-center justify-center cursor-pointer theme-toggle relative rounded-xl neu-flat hover:neu-pressed transition-all"
               aria-label="Toggle theme"
             >
-              <Show when={isDark()} fallback={<Sun class="w-5 h-5" />}>
+              <div class="absolute inset-0 flex items-center justify-center text-orange-500 theme-toggle-icon sun-icon">
+                <Sun class="w-5 h-5" />
+              </div>
+              <div class="absolute inset-0 flex items-center justify-center text-blue-400 theme-toggle-icon moon-icon">
                 <Moon class="w-5 h-5" />
-              </Show>
-            </Motion.button>
+              </div>
+            </button>
           </Show>
 
           {/* Mobile Menu Toggle */}

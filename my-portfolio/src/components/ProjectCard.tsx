@@ -37,9 +37,9 @@ export function ProjectCard(props: Props) {
   const project = () => props.project;
   
   return (
-    <div class="project-card neu-convex overflow-hidden">
+    <div class="project-card neu-convex overflow-hidden h-full flex flex-col">
       {/* Clickable image/title area */}
-      <a href={`/projects/${project().slug}`} class="block">
+      <a href={`/projects/${project().slug}`} class="block flex-1">
         {project().imageUrl && (
           <div class="relative aspect-video bg-[var(--muted)] overflow-hidden">
             <img

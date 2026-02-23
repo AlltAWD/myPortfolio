@@ -35,7 +35,6 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: system-ui, -apple-system, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
   min-height: 100vh;
 }
@@ -91,7 +90,7 @@ body {
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+  transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .reveal.active {
@@ -147,4 +146,40 @@ body {
 .copy-btn:active {
   box-shadow: var(--shadow-inset-light), var(--shadow-inset-dark);
   transform: translateY(0);
+}
+
+/* Theme Transition Utility - Enables smooth transition for all theme-related properties */
+/* This is only applied during the toggle action to prevent flashing on page load */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: all 0.15s ease-out !important;
+  transition-delay: 0s !important;
+}
+
+/* Theme Toggle Icons */
+.theme-toggle-icon {
+  position: absolute;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.dark .sun-icon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0);
+}
+
+html:not(.dark) .moon-icon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0);
+}
+
+html:not(.dark) .sun-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+html.dark .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
