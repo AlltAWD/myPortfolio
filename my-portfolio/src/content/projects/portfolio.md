@@ -24,64 +24,13 @@ An ordinary portfolio website powered by Astro + SolidJS.
 
 ## Features
 
-- **Markdown + $\LaTeX$ Support**: This website supports Markdown and $\LaTeX$ which enables good reading.
+- **Markdown + $\LaTeX$ Support**: This website supports Markdown and $\LaTeX$ for technical writing.
 - **Responsive Design**: Fully responsive layout using Tailwind CSS.
 - **Type Safety**: Built with TypeScript for robust code.
+- **View Transitions**: Smooth animations between pages using Astro's View Transitions.
 
 ## Tech Stack
 
 - **Astro** - UI framework
 - **SolidJS(TypeScript)** - Type safety
 - **Tailwind CSS** - Styling
-- **Zustand** - State management
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/AlltAWD/myPortfolio.git
-
-# Install dependencies
-npm install
-npm run dev
-```
-
-## Configuration
-
-The application requires the following environment variables:
-
-```env
-OPENAI_API_KEY=your_api_key
-DATABASE_URL=postgresql://localhost:5432/ai_images
-REDIS_URL=redis://localhost:6379
-```
-
-## Performance Optimization
-
-We implemented several optimizations:
-
-1. **Model Quantization**: Reduced model size by 4x
-2. **Batch Inference**: Process multiple prompts simultaneously
-3. **Caching**: Redis-based caching for repeated prompts
-4. **CDN**: Image delivery via CloudFlare CDN
-
-## Results
-
-After optimization, we achieved:
-
-| Metric | Before | After |
-|--------|--------|-------|
-| Generation Time | 12s | 3.5s |
-| Memory Usage | 8GB | 4GB |
-| API Latency | 500ms | 120ms |
-
-## Future Plans
-
-- [ ] Support for video generation
-- [ ] Fine-tuning capabilities
-- [ ] Mobile app release
-- [ ] API for third-party integration
-
----
-
-*This project was built as part of my exploration into generative AI. Feel free to check out the [source code](https://github.com/yourusername/ai-image-generator) or try the [live demo](https://ai-image-generator.demo.com)!*
