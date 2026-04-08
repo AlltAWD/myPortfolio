@@ -27,7 +27,7 @@ An ordinary portfolio website powered by Astro + SolidJS.
 - **Markdown + $\LaTeX$ Support**: This website supports Markdown and $\LaTeX$ for technical writing.
 - **Responsive Design**: Fully responsive layout using Tailwind CSS.
 - **Type Safety**: Built with TypeScript for robust code.
-- **View Transitions**: Smooth animations between pages using Astro's View Transitions.
+- **Client Router**: Smooth animations between pages using Astro's Client Router (formerly View Transitions).
 
 ## Tech Stack
 
