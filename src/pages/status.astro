@@ -1,6 +1,37 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
 import { BookOpen, Code, Search, ArrowLeft, Clock } from 'lucide-solid';
+
+const lang = Astro.currentLocale || 'en-US';
+let statusEntry = await getEntry('status', `${lang}/index`);
+if (!statusEntry && lang !== 'en-US') {
+  statusEntry = await getEntry('status', `en-US/index`);
+}
+const statusData = statusEntry?.data || { learning: [], building: [], research: [] };
+
+// Helper to calculate "time ago" string from YYYY-MM-DD
+function timeAgo(dateString: string) {
+  if (!dateString) return 'recently';
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = Math.abs(now.getTime() - date.getTime());
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) return 'today';
+  if (diffDays === 1) return 'yesterday';
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
+  return `${Math.floor(diffDays / 365)} years ago`;
+}
+
+const colorMap: Record<string, string> = {
+  purple: 'purple-500',
+  muted: '[var(--muted)]',
+  blue: 'blue-500',
+  emerald: 'emerald-500'
+};
 ---
 
 <Layout title="Status Detail | Hanson Liu">
@@ -23,35 +54,23 @@ import { BookOpen, Code, Search, ArrowLeft, Clock } from 'lucide-solid';
         </div>
 
         <div class="neu-flat p-8 rounded-2xl space-y-8">
-          <div>
-            <div class="flex justify-between items-end mb-2">
-              <h3 class="text-xl font-bold">Advanced Rust Patterns</h3>
-              <span class="text-blue-500 font-bold">75%</span>
+          {statusData.learning.map((item) => (
+            <div>
+              <div class="flex justify-between items-end mb-2">
+                <h3 class="text-xl font-bold">{item.title}</h3>
+                <span class="text-blue-500 font-bold">{item.progress}%</span>
+              </div>
+              <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
+                <div class="h-full bg-blue-500 rounded-full" style={`width: ${item.progress}%`}></div>
+              </div>
+              <p class="text-[var(--muted-foreground)]">{item.description}</p>
+              <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+                <Clock class="w-4 h-4" />
+                <span>Last updated: {timeAgo(item.lastUpdated)}</span>
+              </div>
             </div>
-            <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
-              <div class="h-full bg-blue-500 rounded-full" style="width: 75%"></div>
-            </div>
-            <p class="text-[var(--muted-foreground)]">Currently focusing on procedural macros and async runtime internals. Next up: Unsafe Rust best practices.</p>
-            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
-              <Clock class="w-4 h-4" />
-              <span>Last updated: 2 days ago</span>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex justify-between items-end mb-2">
-              <h3 class="text-xl font-bold">System Design</h3>
-              <span class="text-blue-500 font-bold">40%</span>
-            </div>
-            <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
-              <div class="h-full bg-blue-500 rounded-full" style="width: 40%"></div>
-            </div>
-            <p class="text-[var(--muted-foreground)]">Studying distributed consensus algorithms (Raft, Paxos) and database sharding strategies.</p>
-            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
-              <Clock class="w-4 h-4" />
-              <span>Last updated: 5 days ago</span>
-            </div>
-          </div>
+          ))}
+          {statusData.learning.length === 0 && <p class="text-[var(--muted-foreground)]">No active learning paths listed.</p>}
         </div>
       </section>
 
@@ -65,24 +84,29 @@ import { BookOpen, Code, Search, ArrowLeft, Clock } from 'lucide-solid';
         </div>
 
         <div class="neu-flat p-8 rounded-2xl space-y-8">
-          <div>
-            <div class="flex justify-between items-end mb-2">
-              <h3 class="text-xl font-bold">Portfolio Website</h3>
-              <span class="text-emerald-500 font-bold">80%</span>
+          {statusData.building.map((item) => (
+            <div>
+              <div class="flex justify-between items-end mb-2">
+                <h3 class="text-xl font-bold">{item.title}</h3>
+                <span class="text-emerald-500 font-bold">{item.progress}%</span>
+              </div>
+              <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
+                <div class="h-full bg-emerald-500 rounded-full" style={`width: ${item.progress}%`}></div>
+              </div>
+              {item.tasks && item.tasks.length > 0 && (
+                <ul class="list-disc list-inside text-[var(--muted-foreground)] mt-4 space-y-1">
+                  {item.tasks.map((task) => (
+                    <li>{task}</li>
+                  ))}
+                </ul>
+              )}
+              <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+                <Clock class="w-4 h-4" />
+                <span>Last updated: {timeAgo(item.lastUpdated)}</span>
+              </div>
             </div>
-            <div class="h-4 bg-[var(--muted)] rounded-full overflow-hidden mb-2">
-              <div class="h-full bg-emerald-500 rounded-full" style="width: 80%"></div>
-            </div>
-            <ul class="list-disc list-inside text-[var(--muted-foreground)] mt-4 space-y-1">
-              <li>Implemented View Transitions</li>
-              <li>Added Dark Mode support</li>
-              <li>Pending: Blog comment system</li>
-            </ul>
-            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
-              <Clock class="w-4 h-4" />
-              <span>Last updated: 4 hours ago</span>
-            </div>
-          </div>
+          ))}
+          {statusData.building.length === 0 && <p class="text-[var(--muted-foreground)]">No active builds listed.</p>}
         </div>
       </section>
 
@@ -96,34 +120,27 @@ import { BookOpen, Code, Search, ArrowLeft, Clock } from 'lucide-solid';
         </div>
 
         <div class="neu-flat p-8 rounded-2xl space-y-8">
-          <div class="border-l-4 border-purple-500 pl-6 py-2">
-            <h3 class="text-xl font-bold mb-2">LLM Fine-tuning</h3>
-            <div class="flex gap-2 mb-4">
-              <span class="px-3 py-1 bg-purple-500/10 text-purple-500 rounded-full text-sm font-bold">PHASE 2: Experimentation</span>
-            </div>
-            <p class="text-[var(--muted-foreground)]">
-              Investigating the impact of LoRA rank on reasoning capabilities in small language models (7B parameters).
-              Currently running benchmarks on the GSM8K dataset.
-            </p>
-            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
-              <Clock class="w-4 h-4" />
-              <span>Last updated: 3 days ago</span>
-            </div>
-          </div>
+          {statusData.research.map((item) => {
+            const isMuted = item.color === 'muted';
+            const colorClass = colorMap[item.color] || 'purple-500';
+            const borderClass = isMuted ? 'border-[var(--muted)] opacity-75' : `border-${colorClass}`;
+            const bgClass = isMuted ? 'bg-[var(--muted)] text-[var(--muted-foreground)]' : `bg-${colorClass}/10 text-${colorClass}`;
 
-          <div class="border-l-4 border-[var(--muted)] pl-6 py-2 opacity-75">
-            <h3 class="text-xl font-bold mb-2">Autonomous AI Agents</h3>
-            <div class="flex gap-2 mb-4">
-              <span class="px-3 py-1 bg-[var(--muted)] text-[var(--muted-foreground)] rounded-full text-sm font-bold">PHASE 1: Literature Review</span>
-            </div>
-            <p class="text-[var(--muted-foreground)]">
-              Reading papers on multi-agent collaboration and memory management.
-            </p>
-            <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
-              <Clock class="w-4 h-4" />
-              <span>Last updated: 2 weeks ago</span>
-            </div>
-          </div>
+            return (
+              <div class={`border-l-4 ${borderClass} pl-6 py-2`}>
+                <h3 class="text-xl font-bold mb-2">{item.title}</h3>
+                <div class="flex gap-2 mb-4">
+                  <span class={`px-3 py-1 ${bgClass} rounded-full text-sm font-bold`}>{item.phase}</span>
+                </div>
+                <p class="text-[var(--muted-foreground)]">{item.description}</p>
+                <div class="flex items-center gap-2 mt-3 text-sm text-[var(--muted-foreground)] opacity-70">
+                  <Clock class="w-4 h-4" />
+                  <span>Last updated: {timeAgo(item.lastUpdated)}</span>
+                </div>
+              </div>
+            );
+          })}
+          {statusData.research.length === 0 && <p class="text-[var(--muted-foreground)]">No active research listed.</p>}
         </div>
       </section>
     </div>

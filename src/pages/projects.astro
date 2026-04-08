@@ -3,7 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import { ProjectsPage } from '../components/ProjectsPage';
 import { getCollection } from 'astro:content';
 
-const projectsCollection = await getCollection('projects');
+const lang = Astro.currentLocale || 'en-US';
+const projectsCollection = await getCollection('projects', (entry) => entry.id.startsWith(`${lang}/`));
 
 const projects = projectsCollection.map((project) => ({
   id: project.id,

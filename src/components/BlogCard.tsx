@@ -4,6 +4,7 @@ export interface BlogPost {
   id: string;
   title: string;
   slug: string;
+  url?: string;
   excerpt?: string;
   coverImage?: string;
   readingTime?: number;
@@ -22,7 +23,7 @@ export function BlogCard(props: Props) {
   const post = () => props.post;
   
   return (
-    <a href={`/blog/${post().slug}`} class="project-card neu-convex overflow-hidden cursor-pointer block">
+    <a href={post().url || `/blog/${post().slug}`} class="project-card neu-convex overflow-hidden cursor-pointer block">
       {post().coverImage && (
         <div class="relative aspect-video bg-[var(--muted)] overflow-hidden">
           <img

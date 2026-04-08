@@ -9,10 +9,11 @@ interface Props {
 }
 
 const { title, description = 'Personal Portfolio' } = Astro.props;
+const lang = Astro.currentLocale || 'en-US';
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

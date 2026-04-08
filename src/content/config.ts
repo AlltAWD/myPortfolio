@@ -33,4 +33,30 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { blog, projects };
+const status = defineCollection({
+  type: 'data',
+  schema: z.object({
+    learning: z.array(z.object({
+      title: z.string(),
+      progress: z.number(),
+      description: z.string(),
+      tasks: z.array(z.string()).default([]),
+      lastUpdated: z.string(),
+    })).default([]),
+    building: z.array(z.object({
+      title: z.string(),
+      progress: z.number(),
+      tasks: z.array(z.string()).default([]),
+      lastUpdated: z.string(),
+    })).default([]),
+    research: z.array(z.object({
+      title: z.string(),
+      phase: z.string(),
+      color: z.string().default('purple'),
+      description: z.string(),
+      lastUpdated: z.string(),
+    })).default([]),
+  }),
+});
+
+export const collections = { blog, projects, status };

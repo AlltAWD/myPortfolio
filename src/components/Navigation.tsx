@@ -1,13 +1,7 @@
 import { createSignal, onMount, createEffect, Show, For } from 'solid-js';
-import { Sun, Moon, Menu, X } from 'lucide-solid';
+import { Sun, Moon, Menu, X, Globe } from 'lucide-solid';
 import { Motion } from 'solid-motionone';
-
-const navItems = [
-  { id: 'home', label: 'Home', href: '/' },
-  { id: 'projects', label: 'Projects', href: '/projects' },
-  { id: 'blog', label: 'Blog', href: '/blog' },
-  { id: 'about', label: 'About', href: '/about' },
-];
+import { ui, defaultLang } from '../i18n/ui';
 
 export function Navigation() {
   const [isDark, setIsDark] = createSignal(false);
@@ -15,8 +9,22 @@ export function Navigation() {
   const [activeTab, setActiveTab] = createSignal('');
   const [capsuleStyle, setCapsuleStyle] = createSignal({ left: 0, width: 0, opacity: 0 });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = createSignal(false);
+  const [currentLang, setCurrentLang] = createSignal<keyof typeof ui>(defaultLang);
   
   let navRefs: (HTMLAnchorElement | undefined)[] = [];
+
+  const getTranslatedNavItems = () => {
+    const lang = currentLang();
+    const t = (key: keyof typeof ui['en-US']) => ui[lang][key] || ui[defaultLang][key];
+    const prefix = lang === defaultLang ? '' : `/${lang}`;
+    
+    return [
+      { id: 'home', label: t('nav.home'), href: `${prefix}/` },
+      { id: 'projects', label: t('nav.projects'), href: `${prefix}/projects` },
+      { id: 'blog', label: t('nav.blog'), href: `${prefix}/blog` },
+      { id: 'about', label: t('nav.about'), href: `${prefix}/about` },
+    ];
+  };
 
   onMount(() => {
     setMounted(true);
@@ -25,27 +33,41 @@ export function Navigation() {
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     setIsDark(theme === 'dark');
 
-    // Function to update active tab
-    const updateActiveTab = () => {
+    // Function to update active tab and language
+    const updateState = () => {
       const path = window.location.pathname.replace(/\/$/, '') || '/';
-      const currentItem = navItems.find(item => 
-        item.href === '/' ? path === '/' : path.startsWith(item.href)
-      );
+      
+      // Determine language from path
+      const langSegment = path.split('/')[1];
+      if (langSegment === 'zh-CN') {
+        setCurrentLang('zh-CN');
+      } else {
+        setCurrentLang('en-US');
+      }
+
+      // Determine active tab
+      const currentItems = getTranslatedNavItems();
+      const currentItem = currentItems.find(item => {
+        if (item.href === '/' || item.href === '/zh-CN') {
+          return path === '/' || path === '/zh-CN';
+        }
+        return path.startsWith(item.href);
+      });
       
       if (currentItem) {
         setActiveTab(currentItem.id);
-      } else if (path.startsWith('/projects')) {
+      } else if (path.includes('/projects')) {
         setActiveTab('projects');
       }
     };
 
     // Wait for fonts to load so we get the correct width for the capsule
     document.fonts.ready.then(() => {
-      updateActiveTab();
+      updateState();
     });
     
     // Listen for Astro page swaps (if ClientRouter is used)
-    document.addEventListener('astro:page-load', updateActiveTab);
+    document.addEventListener('astro:page-load', updateState);
   });
 
   const toggleTheme = () => {
@@ -61,10 +83,24 @@ export function Navigation() {
     setTimeout(() => document.documentElement.classList.remove('theme-transition'), 150);
   };
 
+  const toggleLanguage = () => {
+    const path = window.location.pathname;
+    let newPath = path;
+    
+    if (currentLang() === 'en-US') {
+      newPath = `/zh-CN${path === '/' ? '' : path}`;
+    } else {
+      newPath = path.replace(/^\/zh-CN/, '') || '/';
+    }
+    
+    window.location.href = newPath;
+  };
+
   // Update capsule position when activeTab changes
   createEffect(() => {
     const currentId = activeTab();
-    const index = navItems.findIndex(item => item.id === currentId);
+    const currentItems = getTranslatedNavItems();
+    const index = currentItems.findIndex(item => item.id === currentId);
     
     if (index !== -1 && navRefs[index]) {
       const el = navRefs[index]!;
@@ -107,7 +143,7 @@ export function Navigation() {
             transition={{ duration: 0.3 }}
           />
 
-          <For each={navItems}>
+          <For each={getTranslatedNavItems()}>
             {(item, index) => (
               <a
                 ref={(el) => navRefs[index()] = el}
@@ -123,6 +159,18 @@ export function Navigation() {
 
         <div class="flex items-center gap-2">
           <Show when={mounted()}>
+            <button
+              onClick={toggleLanguage}
+              class="w-10 h-10 flex items-center justify-center cursor-pointer relative rounded-xl neu-flat hover:neu-pressed transition-all text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+              aria-label="Toggle language"
+              title={currentLang() === 'en-US' ? 'Switch to Chinese' : 'Switch to English'}
+            >
+              <Globe class="w-5 h-5" />
+              <span class="absolute -bottom-1 -right-1 text-[10px] font-bold bg-[var(--card)] px-1 rounded-sm shadow-sm">
+                {currentLang() === 'en-US' ? '中' : 'EN'}
+              </span>
+            </button>
+            
             <button
               onClick={toggleTheme}
               class="w-10 h-10 flex items-center justify-center cursor-pointer theme-toggle relative rounded-xl neu-flat hover:neu-pressed transition-all"
@@ -159,7 +207,7 @@ export function Navigation() {
           transition={{ duration: 0.3 }}
         >
           <div class="flex flex-col p-4 gap-2">
-            <For each={navItems}>
+            <For each={getTranslatedNavItems()}>
               {(item) => (
                 <a 
                   href={item.href} 

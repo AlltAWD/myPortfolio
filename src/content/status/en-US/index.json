@@ -1,0 +1,44 @@
+{
+  "learning": [
+    {
+      "title": "Advanced Rust Patterns",
+      "progress": 75,
+      "description": "Currently focusing on procedural macros and async runtime internals. Next up: Unsafe Rust best practices.",
+      "lastUpdated": "2026-04-06"
+    },
+    {
+      "title": "System Design",
+      "progress": 40,
+      "description": "Studying distributed consensus algorithms (Raft, Paxos) and database sharding strategies.",
+      "lastUpdated": "2026-04-03"
+    }
+  ],
+  "building": [
+    {
+      "title": "Portfolio Website",
+      "progress": 80,
+      "tasks": [
+        "Implemented View Transitions",
+        "Added Dark Mode support",
+        "Pending: Blog comment system"
+      ],
+      "lastUpdated": "2026-04-08"
+    }
+  ],
+  "research": [
+    {
+      "title": "LLM Fine-tuning",
+      "phase": "PHASE 2: Experimentation",
+      "color": "purple",
+      "description": "Investigating the impact of LoRA rank on reasoning capabilities in small language models (7B parameters). Currently running benchmarks on the GSM8K dataset.",
+      "lastUpdated": "2026-04-05"
+    },
+    {
+      "title": "Autonomous AI Agents",
+      "phase": "PHASE 1: Literature Review",
+      "color": "muted",
+      "description": "Reading papers on multi-agent collaboration and memory management.",
+      "lastUpdated": "2026-03-25"
+    }
+  ]
+}

@@ -18,4 +18,11 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
   },
+  i18n: {
+    defaultLocale: "en-US",
+    locales: ["en-US", "zh-CN"],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

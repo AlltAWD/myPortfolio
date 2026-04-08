@@ -6,33 +6,42 @@ import IntroSection from '../components/IntroSection.astro';
 import StatusSection from '../components/StatusSection.astro';
 import { getCollection } from 'astro:content';
 
-const projectsCollection = await getCollection('projects');
-const postsCollection = await getCollection('blog');
+const lang = Astro.currentLocale || 'en-US';
+const projectsCollection = await getCollection('projects', (entry) => entry.id.startsWith(`${lang}/`));
+const postsCollection = await getCollection('blog', (entry) => entry.id.startsWith(`${lang}/`));
 
 const projects = projectsCollection
   .filter((p) => p.data.featured)
   .slice(0, 3)
-  .map((project) => ({
-    id: project.id,
-    slug: project.slug,
-    title: project.data.title,
-    description: project.data.description,
-    imageUrl: project.data.coverImage,
-    githubUrl: project.data.githubUrl,
-    demoUrl: project.data.demoUrl,
-    tags: project.data.tags,
-  }));
+  .map((project) => {
+    const cleanSlug = project.slug.split('/').slice(1).join('/');
+    return {
+      id: project.id,
+      slug: cleanSlug,
+      url: lang === 'en-US' ? `/projects/${cleanSlug}` : `/${lang}/projects/${cleanSlug}`,
+      title: project.data.title,
+      description: project.data.description,
+      imageUrl: project.data.coverImage,
+      githubUrl: project.data.githubUrl,
+      demoUrl: project.data.demoUrl,
+      tags: project.data.tags,
+    };
+  });
 
-const posts = postsCollection.slice(0, 3).map((post) => ({
-  id: post.id,
-  title: post.data.title,
-  slug: post.slug,
-  excerpt: post.data.description,
-  coverImage: post.data.coverImage,
-  readingTime: post.data.readingTime,
-  publishedAt: post.data.publishedAt.toISOString(),
-  category: post.data.category,
-}));
+const posts = postsCollection.slice(0, 3).map((post) => {
+  const cleanSlug = post.slug.split('/').slice(1).join('/');
+  return {
+    id: post.id,
+    title: post.data.title,
+    slug: cleanSlug,
+    url: lang === 'en-US' ? `/blog/${cleanSlug}` : `/${lang}/blog/${cleanSlug}`,
+    excerpt: post.data.description,
+    coverImage: post.data.coverImage,
+    readingTime: post.data.readingTime,
+    publishedAt: post.data.publishedAt.toISOString(),
+    category: post.data.category,
+  };
+});
 ---
 
 <Layout title="Home | My Portfolio">
@@ -57,7 +66,7 @@ const posts = postsCollection.slice(0, 3).map((post) => ({
           ))}
         </div>
         <div class="text-center mt-8">
-          <a href="/projects" class="px-6 py-3 neu-flat rounded-xl font-medium hover:opacity-80">
+          <a href={lang === 'en-US' ? '/projects' : `/${lang}/projects`} class="px-6 py-3 neu-flat rounded-xl font-medium hover:opacity-80">
             View All Projects →
           </a>
         </div>

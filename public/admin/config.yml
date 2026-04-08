@@ -1,0 +1,110 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+local_backend: true # Allow local development without pushing to Git
+
+media_folder: "public/images" # Media files will be stored in the repo under public/images
+public_folder: "/images" # The src attribute for uploaded media will begin with /images
+
+i18n:
+  structure: multiple_folders
+  locales: [en-US, zh-CN]
+  default_locale: en-US
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    i18n: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "Description", name: "description", widget: "text", i18n: true }
+      - { label: "Publish Date", name: "publishedAt", widget: "datetime" }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Reading Time (mins)", name: "readingTime", widget: "number", value_type: "int", required: false }
+      - label: "Category"
+        name: "category"
+        widget: "object"
+        fields:
+          - { label: "Name", name: "name", widget: "string", i18n: true }
+          - { label: "Color (Hex)", name: "color", widget: "string", default: "#000000" }
+      - { label: "Body", name: "body", widget: "markdown", i18n: true }
+
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    i18n: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", i18n: true }
+      - { label: "Description", name: "description", widget: "text", i18n: true }
+      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
+      - { label: "Video URL", name: "videoUrl", widget: "string", required: false }
+      - { label: "GitHub URL", name: "githubUrl", widget: "string", required: false }
+      - { label: "Demo URL", name: "demoUrl", widget: "string", required: false }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        fields:
+          - { label: "Name", name: "name", widget: "string", i18n: true }
+          - { label: "Color (Hex)", name: "color", widget: "string", default: "#000000" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Created At", name: "createdAt", widget: "datetime", required: false }
+      - { label: "Body", name: "body", widget: "markdown", i18n: true }
+
+  - name: "pages"
+    label: "Pages"
+    i18n: true
+    files:
+      - label: "Status Page"
+        name: "status"
+        file: "src/content/status/index.json"
+        i18n: true
+        fields:
+          - label: "Learning Path"
+            name: "learning"
+            widget: "list"
+            i18n: true
+            fields:
+              - { label: "Title", name: "title", widget: "string", i18n: true }
+              - { label: "Progress (%)", name: "progress", widget: "number", value_type: "int", min: 0, max: 100 }
+              - { label: "Description", name: "description", widget: "text", i18n: true }
+              - label: "Tasks"
+                name: "tasks"
+                widget: "list"
+                required: false
+                i18n: true
+                field: { label: "Task", name: "task", widget: "string", i18n: true }
+              - { label: "Last Updated Date", name: "lastUpdated", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+          - label: "Active Builds"
+            name: "building"
+            widget: "list"
+            i18n: true
+            fields:
+              - { label: "Title", name: "title", widget: "string", i18n: true }
+              - { label: "Progress (%)", name: "progress", widget: "number", value_type: "int", min: 0, max: 100 }
+              - label: "Tasks"
+                name: "tasks"
+                widget: "list"
+                required: false
+                i18n: true
+                field: { label: "Task", name: "task", widget: "string", i18n: true }
+              - { label: "Last Updated Date", name: "lastUpdated", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+          - label: "Research Lab"
+            name: "research"
+            widget: "list"
+            i18n: true
+            fields:
+              - { label: "Title", name: "title", widget: "string", i18n: true }
+              - { label: "Phase", name: "phase", widget: "string", i18n: true }
+              - label: "Color"
+                name: "color"
+                widget: "select"
+                options: ["purple", "muted", "blue", "emerald"]
+                default: "purple"
+              - { label: "Description", name: "description", widget: "text", i18n: true }
+              - { label: "Last Updated Date", name: "lastUpdated", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }

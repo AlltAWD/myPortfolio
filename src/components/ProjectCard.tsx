@@ -6,6 +6,7 @@ export interface Project {
   title: string;
   description: string;
   slug: string;
+  url?: string;
   imageUrl?: string;
   videoUrl?: string;
   githubUrl?: string;
@@ -39,7 +40,7 @@ export function ProjectCard(props: Props) {
   return (
     <div class="project-card neu-convex overflow-hidden h-full flex flex-col">
       {/* Clickable image/title area */}
-      <a href={`/projects/${project().slug}`} class="block flex-1">
+      <a href={project().url || `/projects/${project().slug}`} class="block flex-1">
         {project().imageUrl && (
           <div class="relative aspect-video bg-[var(--muted)] overflow-hidden">
             <img
@@ -106,7 +107,7 @@ export function ProjectCard(props: Props) {
             </a>
           )}
           <a
-            href={`/projects/${project().slug}`}
+            href={project().url || `/projects/${project().slug}`}
             class="flex items-center gap-2 px-4 py-2 neu-flat rounded-lg text-sm font-medium hover:opacity-80 transition-opacity ml-auto"
           >
             Read More →
