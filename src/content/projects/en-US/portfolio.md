@@ -1,36 +1,36 @@
 ---
 title: "Portfolio Website"
-description: "Just an ordinary portfolio website powered by Astro + SolidJS."
-coverImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200"
-videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+description: "This site — a static portfolio and blog built with Astro and SolidJS, with Markdown + LaTeX support and bilingual routing."
 githubUrl: "https://github.com/AlltAWD/myPortfolio"
-demoUrl: "https://ai-image-generator.demo.com"
 tags:
   - name: "Astro"
     color: "#ff5d01"
+  - name: "SolidJS"
+    color: "#4f88c6"
   - name: "TypeScript"
     color: "#3178c6"
-  - name: "AI/ML"
-    color: "#ff6b6b"
-  - name: "Python"
-    color: "#3776ab"
-featured: true
-createdAt: 2024-01-15
+  - name: "Tailwind"
+    color: "#38bdf8"
+featured: false
+createdAt: 2026-02-12
 ---
 
 # Portfolio Website
 
-An ordinary portfolio website powered by Astro + SolidJS.
+This site. A static portfolio and blog, built to be simple to write for and cheap
+to host.
 
 ## Features
 
-- **Markdown + $\LaTeX$ Support**: This website supports Markdown and $\LaTeX$ for technical writing.
-- **Responsive Design**: Fully responsive layout using Tailwind CSS.
-- **Type Safety**: Built with TypeScript for robust code.
-- **Client Router**: Smooth animations between pages using Astro's Client Router (formerly View Transitions).
+- **Markdown + $\LaTeX$**: technical writing with real math, via remark-math and KaTeX.
+- **Bilingual routing**: English and Chinese, using Astro's built-in i18n.
+- **Responsive layout**: Tailwind CSS, with light and dark themes.
+- **Type safety**: TypeScript throughout, with schema-validated content collections.
+- **Client router**: smooth transitions between pages via Astro's Client Router.
 
 ## Tech Stack
 
-- **Astro** - UI framework
-- **SolidJS(TypeScript)** - Type safety
-- **Tailwind CSS** - Styling
+- **Astro** — static site framework
+- **SolidJS** — interactive components
+- **Tailwind CSS** — styling
+- **Decap CMS** — content editing

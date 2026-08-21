@@ -1,44 +1,50 @@
 {
   "learning": [
     {
-      "title": "Advanced Rust Patterns",
-      "progress": 75,
-      "description": "Currently focusing on procedural macros and async runtime internals. Next up: Unsafe Rust best practices.",
-      "lastUpdated": "2026-04-06"
+      "title": "Modern Robotics (Lynch & Park)",
+      "progress": 30,
+      "description": "Rigid-body motion and kinematics. Chapter 3 material went straight into the FK implementation on the arm; working toward velocity kinematics and the Jacobian.",
+      "tasks": [
+        "Ch 2 — configuration space",
+        "Ch 3 — rotations and homogeneous transforms",
+        "Next: Ch 4-5, forward and inverse kinematics"
+      ],
+      "lastUpdated": "2026-08-20"
     },
     {
-      "title": "System Design",
-      "progress": 40,
-      "description": "Studying distributed consensus algorithms (Raft, Paxos) and database sharding strategies.",
-      "lastUpdated": "2026-04-03"
+      "title": "Control Theory",
+      "progress": 20,
+      "description": "Working through Steve Brunton's control series alongside the hardware, so each idea has something physical to land on.",
+      "tasks": [
+        "State space and feedback basics",
+        "Next: PID, then implementing one on a single joint"
+      ],
+      "lastUpdated": "2026-08-18"
     }
   ],
   "building": [
     {
-      "title": "Portfolio Website",
-      "progress": 80,
+      "title": "SO-101 Manipulator",
+      "progress": 55,
       "tasks": [
-        "Implemented View Transitions",
-        "Added Dark Mode support",
-        "Pending: Blog comment system"
+        "Teach-and-repeat: record and replay joint trajectories",
+        "Arm class: one reusable hardware interface",
+        "Calibration from measured joint range",
+        "Forward kinematics validated to 0.4 cm RMS",
+        "Next: servo characterization and a hand-written PID controller"
       ],
-      "lastUpdated": "2026-04-08"
-    }
-  ],
-  "research": [
-    {
-      "title": "LLM Fine-tuning",
-      "phase": "PHASE 2: Experimentation",
-      "color": "purple",
-      "description": "Investigating the impact of LoRA rank on reasoning capabilities in small language models (7B parameters). Currently running benchmarks on the GSM8K dataset.",
-      "lastUpdated": "2026-04-05"
+      "lastUpdated": "2026-08-20"
     },
     {
-      "title": "Autonomous AI Agents",
-      "phase": "PHASE 1: Literature Review",
-      "color": "muted",
-      "description": "Reading papers on multi-agent collaboration and memory management.",
-      "lastUpdated": "2026-03-25"
+      "title": "This Website",
+      "progress": 70,
+      "tasks": [
+        "Bilingual routing and dark mode",
+        "Markdown + LaTeX content pipeline",
+        "Pending: deployment and CMS authentication"
+      ],
+      "lastUpdated": "2026-08-21"
     }
-  ]
+  ],
+  "research": []
 }
