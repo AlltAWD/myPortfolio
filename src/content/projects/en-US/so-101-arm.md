@@ -42,6 +42,15 @@ arm instead of three steps later.
 **Forward kinematics.** A chain of homogeneous transforms from joint angles to
 end-effector pose, built on CAD-derived URDF parameters.
 
+**URDF + ROS 2.** The same kinematic chain written as a URDF by hand, joint by
+joint, and run through ROS 2's `robot_state_publisher`. At a test pose with every
+joint bent, the gripper frame it computes matches my own FK to 0.1 mm in position
+and to four decimals in rotation, so two independent implementations agree.
+
+![SO-101 URDF in RViz with every TF frame labeled, at the cross-check pose](/images/so101-rviz-tf.png)
+
+*URDF verified against my own FK, which is ruler-validated.*
+
 ## Result: FK validated against measurement
 
 Predicted position checked against ruler measurements at four poses spanning
