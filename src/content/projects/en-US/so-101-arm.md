@@ -2,6 +2,9 @@
 title: "SO-101 Manipulator — Robotics from Servos Up"
 description: "Building a full manipulation stack on a low-cost robot arm, from raw serial-bus servo commands to validated forward kinematics — everything written from scratch."
 githubUrl: "https://github.com/AlltAWD/so-101-arm"
+# TODO: pick a coverImage for the Projects card. /images/so101-rviz-tf.png is
+# already inline in the body, and the detail page renders coverImage at the top
+# too, so reusing it shows it twice. Better: an arm photo or demo-video still.
 tags:
   - name: "Robotics"
     color: "#22c55e"
